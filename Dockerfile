@@ -6,4 +6,4 @@ COPY . .
 # Train model during image build
 RUN python train.py
 EXPOSE 5000
-CMD ["python", "app.py"
+CMD ["python", "app.py"]
