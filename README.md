@@ -55,7 +55,7 @@ docker stack services iris_stack
 
 Course: MSc Data Science – Semester IV
 
-Subject: MLOps / CI-CD
+Subject: MLOps
 
 Project Type: Mini Project / Practical Implementation
 
