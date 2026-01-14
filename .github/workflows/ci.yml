@@ -2,7 +2,7 @@ name: ML CI Pipeline
 
 on: [push]
 
-jobs:
+jobs: 
   test-and-build:
     runs-on: ubuntu-latest
 
