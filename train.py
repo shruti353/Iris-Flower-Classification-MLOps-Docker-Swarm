@@ -1,21 +1,41 @@
 import pandas as pd
-import pickle
-from sklearn.linear_model import LogisticRegression
+import joblib
+import os
+import urllib.request
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 
+# Metadata
+# MSc (Data Science) IV Semester
+# 13th January 2026
 
-URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
+DATA_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+DATA_PATH = "iris.csv"
 
-df = pd.read_csv(URL, sep=";")
+# Download dataset if not exists
+if not os.path.exists(DATA_PATH):
+    urllib.request.urlretrieve(DATA_URL, DATA_PATH)
 
-df["quality"] = (df["quality"] >= 6).astype(int)
+columns = [
+    "sepal_length",
+    "sepal_width",
+    "petal_length",
+    "petal_width",
+    "class"
+]
 
-X = df.drop("quality", axis=1)
-y = df["quality"]
+df = pd.read_csv(DATA_PATH, header=None, names=columns)
 
-model = LogisticRegression(max_iter=1000)
+X = df.drop("class", axis=1)
+y = df["class"]
 
-model.fit(X, y)
+X_train, _, y_train, _ = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
-with open("model.pkl", "wb") as f:
-    pickle.dump(model, f)
-print("Model trained using UCI data")
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+joblib.dump(model, "model.pkl")
+
+print("Iris model trained and saved successfully")
