@@ -25,8 +25,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/shruti353/CI_CD:latest .
+          docker build -t ghcr.io/shruti353/iris-ml-app:latest .
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/shruti353/CI_CD:latest
+          docker push ghcr.io/shruti353/iris-ml-app:latest
